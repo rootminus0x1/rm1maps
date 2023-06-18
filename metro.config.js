@@ -12,8 +12,22 @@ const rnwPath = fs.realpathSync(
   path.resolve(require.resolve('react-native-windows/package.json'), '..'),
 );
 
+const rnwebPath = fs.realpathSync(
+  path.resolve(require.resolve('react-native-web/package.json'), '..'),
+);
+
 module.exports = {
   resolver: {
+     extraNodeModules: {
+      // Redirect react-native to react-native-web
+      'react-native': rnwebPath,
+      'react-native-web': rnwebPath,
+     },
+     // Include the macos platform in addition to the defaults because the fork includes macos, but doesn't declare it
+    platforms: ['ios', 'android', 'windesktop', 'windows', 'web', 'macos'],
+    providesModuleNodeModules: ['react-native-web'],
+    // Since there are multiple copies of react-native, we need to ensure that metro only sees one of them
+    // This should go in RN 0.61 when haste is removed
     blockList: exclusionList([
       // This stops "react-native run-windows" from causing the metro server to crash if its already running
       new RegExp(
@@ -23,6 +37,13 @@ module.exports = {
       new RegExp(`${rnwPath}/build/.*`),
       new RegExp(`${rnwPath}/target/.*`),
       /.*\.ProjectImports\.zip/,
+
+      // This stops "react-native run-web" from causing the metro server to crash if its already running
+      new RegExp(
+        `${path
+          .resolve(__dirname, 'web')
+          .replace(/[/\\\\]/g, '[/\\\\]')}.*`,
+      ),
     ]),
   },
   transformer: {
