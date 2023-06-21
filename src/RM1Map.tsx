@@ -35,10 +35,10 @@ export type RM1MapView = {
  */
 export interface RM1MapProps extends PropsWithChildren<unknown> {
   /** The initial view parameters - {center, zoom}, reset only on full component reload */
-  initial: View;
-  /** Width when not using CSS */
+  initial?: View;
+  /** Width */
   width?: number | string;
-  /** Height when not using CSS */
+  /** Height */
   height?: number | string;
   /**
    * Do not include any default controls. Cannot be changed once set.
@@ -138,13 +138,12 @@ export interface RM1MapProps extends PropsWithChildren<unknown> {
   constrainRotation?: boolean | number;
 }
 
-function RM1Map(): JSX.Element {
+function RM1Map(props: RM1MapProps): JSX.Element {
   const [, setMap] = React.useState<Map>();
-  //  const [ featuresLayer, setFeaturesLayer ] = useState()
+  // const [ featuresLayer, setFeaturesLayer ] = useState()
   // const [ selectedCoord , setSelectedCoord ] = React.useState()
 
-  // @ts-ignore
-  const mapElementRef = React.useRef();
+  const mapElementRef = React.useRef(null);
   // state ref that openlayers can access
   //const mapRef = useRef();
   //mapRef.current = map;
@@ -173,8 +172,8 @@ function RM1Map(): JSX.Element {
 
     // setFeatureLayer, etc.
 
-    // to remove flickering
-    // return () => initialMap.setTarget(null)
+    // to remove old attached View, also removes flickering
+    return () => initialMap.setTarget();
   }, []);
 
   // another useEffect with dependencies for updates here:
@@ -198,8 +197,11 @@ function RM1Map(): JSX.Element {
   */
 
   return (
-    // @ts-ignore
-    <RN.View ref={mapElementRef} style={{height: '100vh', width: '100%'}} />
+    <RN.View
+      // @ts-ignore
+      ref={mapElementRef}
+      style={{width: props.width, height: props.height}}
+    />
   );
 }
 

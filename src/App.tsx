@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import * as React from 'react';
 // import type {PropsWithChildren} from 'react';
 import * as RN from 'react-native';
 
@@ -35,7 +35,7 @@ const Colors = {
 };
 */
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   /*
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
@@ -49,7 +49,10 @@ function App(): JSX.Element {
       <RN.Text onPress={buttonPressed} style={styles.highlight}>
         Press me
       </RN.Text>
-      <RM1Map />
+      <RM1Map
+        width={styles.mapcontainer.width}
+        height={styles.mapcontainer.height}
+      />
     </RN.View>
   );
 }
@@ -74,6 +77,10 @@ const styles = RN.StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  mapcontainer: {
+    height: '100vh',
+    width: '100%',
   },
 });
 
