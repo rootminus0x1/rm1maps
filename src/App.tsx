@@ -7,14 +7,12 @@
 
 import React from 'react';
 // import type {PropsWithChildren} from 'react';
-import {
-  //  SafeAreaView,
-  //  StatusBar,
-  StyleSheet,
-  Text,
-  // useColorScheme,
-  View,
-} from 'react-native';
+import * as RN from 'react-native';
+
+//import {fromLonLat} from 'ol/proj';
+import 'ol/ol.css';
+
+import RM1Map from './RM1Map';
 
 /*
   Colors,
@@ -46,12 +44,13 @@ function App(): JSX.Element {
   */
 
   return (
-    <View>
-      <Text>Hello World!</Text>
-      <Text onPress={buttonPressed} style={styles.highlight}>
+    <RN.View>
+      <RN.Text>Hello World!</RN.Text>
+      <RN.Text onPress={buttonPressed} style={styles.highlight}>
         Press me
-      </Text>
-    </View>
+      </RN.Text>
+      <RM1Map />
+    </RN.View>
   );
 }
 
@@ -59,7 +58,7 @@ function buttonPressed() {
   console.log('Test Button!');
 }
 
-const styles = StyleSheet.create({
+const styles = RN.StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
