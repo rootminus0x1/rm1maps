@@ -52,6 +52,9 @@ function App(): React.JSX.Element {
       <RM1Map
         width={styles.mapcontainer.width}
         height={styles.mapcontainer.height}
+        center={{longitude: 20.5, latitude: 41.0}}
+        zoom={1}
+        layers={['local']}
       />
     </RN.View>
   );

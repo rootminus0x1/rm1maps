@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "windows": "react-native run-windows",
     "ios": "react-native run-ios",
-    "web": "react-scripts start",
+    "web": "set PORT=3010 && react-scripts start",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
