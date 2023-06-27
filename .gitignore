@@ -6,6 +6,9 @@
 #
 .vscode/.react
 
+# emacs
+*.~undo-tree~
+
 # Xcode
 #
 build/
