@@ -53,8 +53,10 @@ function App(): React.JSX.Element {
         width={styles.mapcontainer.width}
         height={styles.mapcontainer.height}
         center={{longitude: 20.5, latitude: 41.0}}
-        zoom={1}
-        layers={['local']}
+        zoom={7}
+        layers={['osm']}
+        regions={['albania']}
+        style={'osm-liberty'}
       />
     </RN.View>
   );
